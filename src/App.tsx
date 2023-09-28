@@ -1,10 +1,17 @@
+import { autorun, reaction } from "mobx";
 import "./App.css";
-import FormSection from "./components/FormSection/FormSection";
+import FormSection from "./examples/FormSection/FormSection";
+import { observer } from "mobx-react-lite";
+import { useContext, useState } from "react";
+import { RootStoreContext } from "./main";
+import { Watcher } from "./examples/FormSection/Watcher";
 
 const App = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <>
-      <blockquote
+      {/* <blockquote
         style={{
           textAlign: "left",
           maxWidth: "700px",
@@ -23,8 +30,10 @@ const App = () => {
         <footer>
           <cite>- Some random old traveling magician</cite>
         </footer>
-      </blockquote>
+      </blockquote> */}
       <FormSection />
+      {visible ? <Watcher /> : <></>}
+      <button onClick={() => setVisible(!visible)}>Toggle watcher</button>
     </>
   );
 };
